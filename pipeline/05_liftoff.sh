@@ -15,12 +15,18 @@ source ~/miniconda3/etc/profile.d/conda.sh
 
 conda activate liftoff-env
 
-TARGET_GENOME="../RNA_seq_align/dsia_1.3.fasta"
-REFERENCE_GENOME="..//RNA_seq_align/dhyp_1.0-families.fa"
-REFERENCE_GFF="../RNA_seq_align/dhyp.rnd3.kw.sort.gff"
-UNMAPPED_FEATURES="./sia_unmapped.txt"
-INT_DIR="./hyp2sia_int"
-OUTPUT_GFF="../RNA_seq_align/dsia_1.3.gff"
+#subset for non DC Mullers
+echo -e "MullerA\nMullerB\nMullerE\nMullerF" > targets_nonDC.txt
+
+grep -v "MullerDC" ../dhyp.rnd3.kw.sort.gff > dhyp_nonDC.gff
+
+TARGET_GENOME="../dsia_1.3.fasta"
+REFERENCE_GENOME="../dhyp_1.0.fa"
+REFERENCE_GFF="dhyp_nonDC.gff"
+UNMAPPED_FEATURES="unmapped_nonDC_sia.txt"
+INT_DIR="int_nonDC_sia"
+OUTPUT_GFF="sia_nonDC.gff"
+TARGET="targets_nonDC.txt"
 
 mkdir -p "$INT_DIR"
 
@@ -32,9 +38,114 @@ liftoff \
     -u "$UNMAPPED_FEATURES" \
     -copies \
     -p 8 \
+    -t "$TARGET" \
     -dir "$INT_DIR" \
     "$TARGET_GENOME" \
     "$REFERENCE_GENOME" 
+
+#subset for DC1/2 haplotypes A and B
+
+grep "MullerDC_1" ../dhyp.rnd3.kw.sort.gff > dhyp_DC1.gff
+grep "MullerDC_2" ../dhyp.rnd3.kw.sort.gff > dhyp_DC2.gff
+
+echo "MullerDC1.hapA" > targets_DC1_hapA.txt
+echo "MullerDC1.hapB" > targets_DC1_hapB.txt
+echo "MullerDC2.hapA" > targets_DC2_hapA.txt
+echo "MullerDC2.hapB" > targets_DC2_hapB.txt
+
+#DC1 hapA
+TARGET_GENOME="../dsia_1.3.fasta"
+REFERENCE_GENOME="../dhyp_1.0.fa"
+REFERENCE_GFF="dhyp_DC2.gff"
+UNMAPPED_FEATURES="unmapped_DC1_hapA_sia.txt"
+INT_DIR="int_DC1_hapA_sia"
+OUTPUT_GFF="sia_DC1_hapA.gff"
+TARGET="targets_DC1_hapA.txt"
+
+mkdir -p "$INT_DIR"
+
+echo "3, 2, 1"
+
+liftoff \
+    -g "$REFERENCE_GFF" \
+    -o "$OUTPUT_GFF" \
+    -u "$UNMAPPED_FEATURES" \
+    -p 8 \
+    -t "$TARGET" \
+    -dir "$INT_DIR" \
+    "$TARGET_GENOME" \
+    "$REFERENCE_GENOME" 
+
+#DC1 hapB
+TARGET_GENOME="../dsia_1.3.fasta"
+REFERENCE_GENOME="../dhyp_1.0.fa"
+REFERENCE_GFF="dhyp_DC2.gff"
+UNMAPPED_FEATURES="unmapped_DC1_hapB_sia.txt"
+INT_DIR="int_DC1_hapB_sia"
+OUTPUT_GFF="sia_DC1_hapB.gff"
+TARGET="targets_DC1_hapB.txt"
+
+mkdir -p "$INT_DIR"
+
+echo "3, 2, 1"
+
+liftoff \
+    -g "$REFERENCE_GFF" \
+    -o "$OUTPUT_GFF" \
+    -u "$UNMAPPED_FEATURES" \
+    -p 8 \
+    -t "$TARGET" \
+    -dir "$INT_DIR" \
+    "$TARGET_GENOME" \
+    "$REFERENCE_GENOME" 
+
+#DC2 hapA
+TARGET_GENOME="../dsia_1.3.fasta"
+REFERENCE_GENOME="../dhyp_1.0.fa"
+REFERENCE_GFF="dhyp_DC1.gff"
+UNMAPPED_FEATURES="unmapped_DC2_hapA_sia.txt"
+INT_DIR="int_DC2_hapA_sia"
+OUTPUT_GFF="sia_DC2_hapA.gff"
+TARGET="targets_DC2_hapA.txt"
+
+mkdir -p "$INT_DIR"
+
+echo "3, 2, 1"
+
+liftoff \
+    -g "$REFERENCE_GFF" \
+    -o "$OUTPUT_GFF" \
+    -u "$UNMAPPED_FEATURES" \
+    -p 8 \
+    -t "$TARGET" \
+    -dir "$INT_DIR" \
+    "$TARGET_GENOME" \
+    "$REFERENCE_GENOME" 
+
+#DC2 hap B
+TARGET_GENOME="../dsia_1.3.fasta"
+REFERENCE_GENOME="../dhyp_1.0.fa"
+REFERENCE_GFF="dhyp_DC1.gff"
+UNMAPPED_FEATURES="unmapped_DC2_hapB_sia.txt"
+INT_DIR="int_DC2_hapB_sia"
+OUTPUT_GFF="sia_DC2_hapB.gff"
+TARGET="targets_DC2_hapB.txt"
+
+mkdir -p "$INT_DIR"
+
+echo "3, 2, 1"
+
+liftoff \
+    -g "$REFERENCE_GFF" \
+    -o "$OUTPUT_GFF" \
+    -u "$UNMAPPED_FEATURES" \
+    -p 8 \
+    -t "$TARGET" \
+    -dir "$INT_DIR" \
+    "$TARGET_GENOME" \
+    "$REFERENCE_GENOME" 
+
+cat sia_DC1_hapA.gff sia_DC1_hapB.gff sia_DC2_hapA.gff sia_DC2_hapB.gff sia_nonDC.gff > ../dsia_1.3.gff
 
 conda deactivate 
 
