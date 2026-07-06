@@ -16,7 +16,7 @@ source ~/miniconda3/etc/profile.d/conda.sh
 conda activate liftoff-env
 
 #subset for non DC Mullers
-echo -e "MullerA\nMullerB\nMullerE\nMullerF" > targets_nonDC.txt
+echo -e "MullerA,MullerA\nMullerB,MullerB\nMullerE,MullerE\nMullerF,MullerF" > chroms_nonDC.txt
 
 grep -v "MullerDC" ../dhyp.rnd3.kw.sort.gff > dhyp_nonDC.gff
 
@@ -26,7 +26,7 @@ REFERENCE_GFF="dhyp_nonDC.gff"
 UNMAPPED_FEATURES="unmapped_nonDC_sia.txt"
 INT_DIR="int_nonDC_sia"
 OUTPUT_GFF="sia_nonDC.gff"
-TARGET="targets_nonDC.txt"
+CHROMS="chroms_nonDC.txt"
 
 mkdir -p "$INT_DIR"
 
@@ -38,7 +38,7 @@ liftoff \
     -u "$UNMAPPED_FEATURES" \
     -copies \
     -p 8 \
-    -t "$TARGET" \
+    -chroms "$CHROMS" \
     -dir "$INT_DIR" \
     "$TARGET_GENOME" \
     "$REFERENCE_GENOME" 
@@ -48,10 +48,10 @@ liftoff \
 grep "MullerDC_1" ../dhyp.rnd3.kw.sort.gff > dhyp_DC1.gff
 grep "MullerDC_2" ../dhyp.rnd3.kw.sort.gff > dhyp_DC2.gff
 
-echo "MullerDC1.hapA" > targets_DC1_hapA.txt
-echo "MullerDC1.hapB" > targets_DC1_hapB.txt
-echo "MullerDC2.hapA" > targets_DC2_hapA.txt
-echo "MullerDC2.hapB" > targets_DC2_hapB.txt
+echo "MullerDC_2,MullerDC1.hapA" > chroms_DC1_hapA.txt
+echo "MullerDC_2,MullerDC1.hapB" > chroms_DC1_hapB.txt
+echo "MullerDC_1,MullerDC2.hapA" > chroms_DC2_hapA.txt
+echo "MullerDC_1,MullerDC2.hapB" > chroms_DC2_hapB.txt
 
 #DC1 hapA
 TARGET_GENOME="../dsia_1.3.fasta"
@@ -60,7 +60,7 @@ REFERENCE_GFF="dhyp_DC2.gff"
 UNMAPPED_FEATURES="unmapped_DC1_hapA_sia.txt"
 INT_DIR="int_DC1_hapA_sia"
 OUTPUT_GFF="sia_DC1_hapA.gff"
-TARGET="targets_DC1_hapA.txt"
+CHROMS="chroms_DC1_hapA.txt"
 
 mkdir -p "$INT_DIR"
 
@@ -71,7 +71,7 @@ liftoff \
     -o "$OUTPUT_GFF" \
     -u "$UNMAPPED_FEATURES" \
     -p 8 \
-    -t "$TARGET" \
+    -chroms "$CHROMS" \
     -dir "$INT_DIR" \
     "$TARGET_GENOME" \
     "$REFERENCE_GENOME" 
@@ -83,7 +83,7 @@ REFERENCE_GFF="dhyp_DC2.gff"
 UNMAPPED_FEATURES="unmapped_DC1_hapB_sia.txt"
 INT_DIR="int_DC1_hapB_sia"
 OUTPUT_GFF="sia_DC1_hapB.gff"
-TARGET="targets_DC1_hapB.txt"
+CHROMS="chroms_DC1_hapB.txt"
 
 mkdir -p "$INT_DIR"
 
@@ -94,7 +94,7 @@ liftoff \
     -o "$OUTPUT_GFF" \
     -u "$UNMAPPED_FEATURES" \
     -p 8 \
-    -t "$TARGET" \
+    -chroms "$CHROMS" \
     -dir "$INT_DIR" \
     "$TARGET_GENOME" \
     "$REFERENCE_GENOME" 
@@ -106,7 +106,7 @@ REFERENCE_GFF="dhyp_DC1.gff"
 UNMAPPED_FEATURES="unmapped_DC2_hapA_sia.txt"
 INT_DIR="int_DC2_hapA_sia"
 OUTPUT_GFF="sia_DC2_hapA.gff"
-TARGET="targets_DC2_hapA.txt"
+CHROMS="chroms_DC2_hapA.txt"
 
 mkdir -p "$INT_DIR"
 
@@ -117,7 +117,7 @@ liftoff \
     -o "$OUTPUT_GFF" \
     -u "$UNMAPPED_FEATURES" \
     -p 8 \
-    -t "$TARGET" \
+    -chroms "$CHROMS" \
     -dir "$INT_DIR" \
     "$TARGET_GENOME" \
     "$REFERENCE_GENOME" 
@@ -129,7 +129,7 @@ REFERENCE_GFF="dhyp_DC1.gff"
 UNMAPPED_FEATURES="unmapped_DC2_hapB_sia.txt"
 INT_DIR="int_DC2_hapB_sia"
 OUTPUT_GFF="sia_DC2_hapB.gff"
-TARGET="targets_DC2_hapB.txt"
+CHROMS="chroms_DC2_hapB.txt"
 
 mkdir -p "$INT_DIR"
 
@@ -140,7 +140,7 @@ liftoff \
     -o "$OUTPUT_GFF" \
     -u "$UNMAPPED_FEATURES" \
     -p 8 \
-    -t "$TARGET" \
+    -chroms "$CHROMS" \
     -dir "$INT_DIR" \
     "$TARGET_GENOME" \
     "$REFERENCE_GENOME" 
