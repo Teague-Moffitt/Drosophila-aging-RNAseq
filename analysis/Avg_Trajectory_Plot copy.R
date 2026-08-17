@@ -2,18 +2,28 @@ library(ggplot2)
 library(dplyr)
 library(DESeq2)
 
-# Get normalized counts for monotonically increasing genes
-vsd_counts <- varianceStabilizingTransformation(dds_hypo_carcass_KW, blind=FALSE)
+metadat_avg <- #metadata
+gene_list <-#gene_names
+given_dds <- #dds object
 
-vsd_counts <- assay(vsd_hypo_carcass_KW)
+plot_name <- #file name
+plot_title <- #title
+  
+# Get normalized counts 
+vsd_counts <- varianceStabilizingTransformation(given_dds, blind=FALSE)
 
-# Subset to monotonic genes of interest
-mono_genes <- mediate_hc[,1]  # or decreasing_ordered
-mono_counts <- vsd_counts[mono_genes, ]
-mono_counts <- mono_counts[, rownames(metadata_hypo_carcass_KW)]
+vsd_counts <- assay(vsd_counts)
+
+# Subset to  genes of interest
+mono_genes <- (gene_list)  
+mono_genes <- intersect(mono_genes, rownames(vsd_counts))
+mono_counts <- vsd_counts[mono_genes,]
+mono_counts <- mono_counts[, rownames(metadat_avg)]
+common_samples <- intersect(colnames(mono_counts), rownames(metadat_avg))
+mono_counts <- mono_counts[, common_samples]
 
 # Get metadata
-plot_meta <- metadata_hypo_carcass_KW
+plot_meta <- metadat_avg[common_samples, ]
 
 # Average expression per gene across age and sex
 avg_expression <- as.data.frame(t(mono_counts)) %>%
@@ -39,9 +49,9 @@ ggplot(avg_expression, aes(x=Age, y=Mean_expression, color=Sex)) +
                   fill=Sex), alpha=0.2, color = NA) +
   scale_color_manual(values=c("F"="red", "M"="blue")) +
   scale_fill_manual(values=c("F"="red", "M"="blue")) +
-  labs(#title="Average trajectory of monotonic decreasing genes",
+  labs(title= plot_title,
        x="Age (days)",
        y="Mean VST expression") +
   theme_classic()
 
-#ggsave("Plots/Avg_KW_mono_dec.pdf")
+ggsave(paste0("Results/Plots/Avg_Trajectories/", plot_name, ".pdf"))
