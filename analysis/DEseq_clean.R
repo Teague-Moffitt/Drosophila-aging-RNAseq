@@ -156,12 +156,6 @@ inc_hypo_m <- subset(res_age_male, padj < 0.05 & log2FoldChange > 0)
 
 dec_hypo_m <- subset(res_age_male, padj < 0.05 & log2FoldChange < 0)
 
-###view top 100 ----
-# top_100_sex_dec <- head(decreasing_sex_ordered, n = 100)
-# 
-# cat(rownames(top_100_sex_dec), sep = "\n")
-
-
 #D. SIAMANA liftoff genome ----
 
 ##make metadata ----
@@ -289,12 +283,6 @@ inc_sia_m <- subset(res_sia_age_male, padj < 0.05 & log2FoldChange > 0)
 
 dec_sia_m <- subset(res_sia_age_male, padj < 0.05 & log2FoldChange < 0)
 
-###view top 100 ----
-# top_100_sex_dec <- head(decreasing_sex_ordered, n = 100)
-# 
-# cat(rownames(top_100_sex_dec), sep = "\n")
-
-
 #D. hypocausta germline ----
 
 ##create hypo gl metadata ----
@@ -336,7 +324,7 @@ dds_hypo_gl <- DESeqDataSetFromMatrix(
 
 dds_hypo_gl <- DESeq(dds_hypo_gl)
 
-vsd_hypo_carcass_KW <- vst(dds_hypo_gl, blind = TRUE)
+vsd_hypo_gl <- vst(dds_hypo_gl, blind = TRUE)
 
 
 ##Monotonic Genes ----
@@ -353,16 +341,9 @@ res_hypo_gl_age_male <- results(
   contrast = list(c("Age_c", "SexM.Age_c"))
 )
 
-inc_hypo_gl_m <- subset(res_age_male, padj < 0.05 & log2FoldChange > 0)
+inc_hypo_gl_m <- subset(res_hypo_gl_age_male, padj < 0.05 & log2FoldChange > 0)
 
-dec_hypo_gl_m <- subset(res_age_male, padj < 0.05 & log2FoldChange < 0)
-
-###view top 100 ----
-# top_100_sex_dec <- head(decreasing_sex_ordered, n = 100)
-# 
-# cat(rownames(top_100_sex_dec), sep = "\n")
-
-
+dec_hypo_gl_m <- subset(res_hypo_gl_age_male, padj < 0.05 & log2FoldChange < 0)
 
 #D. siamana germline ----
 
@@ -418,13 +399,6 @@ res_sia_gl_age_male <- results(
 inc_sia_gl_m <- subset(res_sia_gl_age_male, padj < 0.05 & log2FoldChange > 0)
 
 dec_sia_gl_m <- subset(res_sia_gl_age_male, padj < 0.05 & log2FoldChange < 0)
-
-###view top 100 ----
-# top_100_sex_dec <- head(decreasing_sex_ordered, n = 100)
-# 
-# cat(rownames(top_100_sex_dec), sep = "\n")
-
-
 
 #D. HYPOCASTA CARCASS KW w/out 60 day old flies ----
 
