@@ -12,9 +12,9 @@ set -euo pipefail
 
 source ~/miniconda3/etc/profile.d/conda.sh
 
-ALG_DIR="./aligned_bams"
+ALG_DIR="./aligned_bams" # includes merged bams + single lane bams
 CNT_DIR="./read_counts"
-ANNOTATION="./D.hyp.gtf"
+ANNOTATION="./D.hyp.gtf" 
 
 mkdir -p "$CNT_DIR"
 
