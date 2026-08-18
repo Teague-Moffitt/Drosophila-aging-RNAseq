@@ -4,7 +4,7 @@ library(here)
 
 ##make metadata ----
 metadata <- read.csv(
-  here("Data", "metadata_no_outliers.csv"), 
+  #metadata.csv, 
   header = TRUE, 
   row.names = 1,
   colClasses = "factor"
@@ -22,7 +22,7 @@ metadata$Sex <- as.factor(metadata$Sex)
 metadata$Tissue <- as.factor(metadata$Tissue)
 
 ##create list of files ----
-count_dir <- here("Data", "raw_read_counts")
+count_dir <- #read count directory
 
 files <- list.files(
   path = count_dir,
