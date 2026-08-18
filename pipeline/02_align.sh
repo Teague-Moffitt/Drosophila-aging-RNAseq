@@ -12,9 +12,9 @@ set -euo pipefail
 
 source ~/miniconda3/etc/profile.d/conda.sh
 
-TRIM_DIR="./trimmed_reads"
+TRIM_DIR="./trimmed_reads" 
 ALG_DIR="./aligned_reads"
-INDEX="./dhyp_index/dhyp_index"
+INDEX="./dhyp_index/dhyp_index" #index created via HISAT2
 
 mkdir -p "$ALG_DIR"
 
