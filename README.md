@@ -6,9 +6,9 @@ dimorphic aging and melanization in *Drosophila hypocausta* and *D. siamana*.
 This work was conducted in the Wei Lab at the University of British Columbia.
 
 ## Biological Background
-*D. hypocausta* and *D. siamana* display marked sexual dimorphism in both 
+*D. hypocausta* and *D. siamana* display distinct sexual dimorphism in both 
 lifespan and melanization patterning. This study uses whole-transcriptome 
-RNA sequencing across aging timepoints to identify the genetic basis driving 
+RNA sequencing spanning the lifespan of the flies to identify the genetic basis driving 
 sex-specific aging trajectories and melanization phenotypes.
 
 ## Experimental Design
@@ -20,7 +20,7 @@ sex-specific aging trajectories and melanization phenotypes.
 for both species and tissues.
 
 ## Key Findings
-This study identified a candidate gene for the melanization phenotype and 
+This study identified a candidate gene involved in the melanization phenotype and 
 demonstrated systematic differences in gene expression between sexes, 
 potentially contributing to overall sexual dimorphism in aging trajectories.
 
@@ -57,7 +57,7 @@ comparative analysis.
 **Pipeline tools**
 - fastp
 - HISAT2
-- featureCounts (Subread package)
+- featureCounts
 - Liftoff
 
 **R packages**
