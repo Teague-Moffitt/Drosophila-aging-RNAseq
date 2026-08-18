@@ -20,7 +20,7 @@ sex-specific aging trajectories and melanization phenotypes.
 for both species and tissues.
 
 ## Key Findings
-This study identified a candidate gene for the melanization phenotype (Ddc) and 
+This study identified a candidate gene for the melanization phenotype and 
 demonstrated systematic differences in gene expression between sexes, 
 potentially contributing to overall sexual dimorphism in aging trajectories.
 
