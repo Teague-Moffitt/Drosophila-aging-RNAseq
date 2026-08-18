@@ -11,8 +11,8 @@ set -euo pipefail
 
 source ~/miniconda3/etc/profile.d/conda.sh
 
-ALG_DIR="./TE_aligned_reads"
-MERGED_DIR="./TE_merged_bams"
+ALG_DIR="./aligned_reads"
+MERGED_DIR="./merged_bams"
 
 mkdir -p "$MERGED_DIR"
 
